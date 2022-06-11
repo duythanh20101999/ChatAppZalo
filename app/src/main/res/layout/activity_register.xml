@@ -31,7 +31,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="Create An Account"
+=======
+            android:text="Tạo tài khoản"
+>>>>>>> 37d8fbf (Initial commit)
             android:layout_gravity="center"
             android:textSize="20sp"
             android:layout_margin="20dp"
@@ -72,7 +76,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:id="@+id/register_Account_btn"
+<<<<<<< HEAD
             android:text="Register"
+=======
+            android:text="Đăng ký"
+>>>>>>> 37d8fbf (Initial commit)
             android:background="@android:color/holo_red_light"
             android:textColor="@android:color/white"/>
 

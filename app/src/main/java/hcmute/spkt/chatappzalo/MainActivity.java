@@ -72,9 +72,15 @@ public class MainActivity extends AppCompatActivity {
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
         //có 3 fragment tương ứng với 3 class và 3 title
+<<<<<<< HEAD
         viewPageAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPageAdapter.addFragment(new UsersFragment(), "Users");
         viewPageAdapter.addFragment(new ProfileFragment(), "Profile");
+=======
+        viewPageAdapter.addFragment(new ChatsFragment(), "Tin nhắn");
+        viewPageAdapter.addFragment(new UsersFragment(), "Người dùng");
+        viewPageAdapter.addFragment(new ProfileFragment(), "Cá nhân");
+>>>>>>> 37d8fbf (Initial commit)
 
         //set view pager và tablayout
         viewPager.setAdapter(viewPageAdapter);
