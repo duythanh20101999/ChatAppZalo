@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,10 +78,12 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+
         return view;
     }
 
-    //lấy danh sách các tài khoản có trong danh sách chat
+
+    //lấy danh sách các tài khoản có trong danh sách chat để đưa lên fragment
     private void ChatListings() {
         mUsers = new ArrayList<>();
 
@@ -104,7 +105,7 @@ public class ChatsFragment extends Fragment {
                     }
                 }
 
-                mAdapter = new UserAdapter(getContext(), mUsers, true);
+                mAdapter = new UserAdapter(getContext(), mUsers, true, true);
                 recyclerView.setAdapter(mAdapter);
             }
 

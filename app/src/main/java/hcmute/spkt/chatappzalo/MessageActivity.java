@@ -1,12 +1,15 @@
 package hcmute.spkt.chatappzalo;
 
+import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +51,7 @@ public class MessageActivity extends AppCompatActivity {
     //các biến set giao diện
     EditText et_message;
     Button send;
-
+    ImageButton attachBtn;
 
     DatabaseReference reference;
 
@@ -57,6 +60,9 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter messageAdapter;
     RecyclerView recyclerView;
     ValueEventListener seenlistener;
+
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,8 @@ public class MessageActivity extends AppCompatActivity {
 
         et_message = findViewById(R.id.edit_message_text);
         send = findViewById(R.id.send_messsage_btn);
+        attachBtn = findViewById(R.id.camera_gallery_btn);
+
 
         //lấy tài khoản đang đăng nhập
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -160,6 +168,7 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+
     //Hàm set trang thái tin nhắn đã đọc
     private void seenMessage(String friendid){
         reference = FirebaseDatabase.getInstance().getReference("Chat");
@@ -223,8 +232,9 @@ public class MessageActivity extends AppCompatActivity {
     //hàm gửi tin nhắn
     private void sendMessage(String myid, String friendid, String message) {
 
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
+        //Thêm các thông tin của 1 tin nhắn vào firebase
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", myid);
         hashMap.put("receiver", friendid);
@@ -248,7 +258,26 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+        final DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(friendid).child(myid);
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists()) {
+                    reference2.child("id").setValue(myid);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
+
+
 
     //hàm set trạng thái online/offline cho tài khoản
     private void Status (String status){
@@ -273,4 +302,5 @@ public class MessageActivity extends AppCompatActivity {
         Status("offline");
         reference.removeEventListener(seenlistener);
     }
+
 }

@@ -2,6 +2,7 @@ package hcmute.spkt.chatappzalo.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,17 +34,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
     //biến này dùng để lưu danh sánh các tài khoản
     List<Users> usersList;
     //
-    boolean isChat;
+    boolean isChat, isOnline;
     //biến này dùng dể lưu id 1 tài khoản
     String friendid;
     //biến này dùng để lưu tin nhắn gần nhất
     String thelastmessage;
     FirebaseUser firebaseUser;
 
-    public UserAdapter(Context context, List<Users> usersList, boolean isChat) {
+    public UserAdapter(Context context, List<Users> usersList, boolean isChat, boolean isOnline) {
         this.context = context;
         this.usersList = usersList;
         this.isChat = isChat;
+        this.isOnline = isOnline;
     }
 
     //set view cho holder
@@ -61,6 +63,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
         //lấy user hiện tại trong danh sách
         Users users = usersList.get(position);
 
+
         friendid = users.getId();
 
         //set username lên toolbar
@@ -76,7 +79,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
         }
 
         //kiểm tra trạng thái online/offline
-        if(isChat){
+        if(isOnline){
 
             if(users.getStatus().equals("online")){
                 holder.image_on.setVisibility(View.VISIBLE);
@@ -153,6 +156,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
                         if(chat.getSender().equals(friendid) && chat.getReceiver().equals(firebaseUser.getUid()) ||
                                 chat.getSender().equals(firebaseUser.getUid()) && chat.getReceiver().equals(friendid)){
                             thelastmessage = chat.getMessage();
+                            if(chat.isIsseen()){
+                                las_msg.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+                            } else {
+                                las_msg.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                            }
                         }
                     }
                 }
