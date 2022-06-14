@@ -117,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     //Nếu tạo tài khoản thành công sẽ đưa ra thông báo và chuyển về màn hình start
                                     Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                    mAuth.signOut();
                                     startActivity(new Intent(RegisterActivity.this,
                                             StartActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK ));
 

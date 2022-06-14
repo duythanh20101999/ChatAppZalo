@@ -9,25 +9,21 @@
     tools:context=".StartActivity">
 
 
+    <ImageView
+        android:id="@+id/logozalo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logo_zalo" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zalo App 13"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:textSize="50sp"
-        android:id="@+id/text1"
-        android:layout_marginTop="220dp"
-        android:layout_centerHorizontal="true"/>
 
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text1"
+        android:layout_below="@id/logozalo"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"

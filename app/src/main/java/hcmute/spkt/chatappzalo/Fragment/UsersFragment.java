@@ -61,13 +61,14 @@ public class UsersFragment extends Fragment {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     Users users = ds.getValue(Users.class);
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if(firebaseUser!=null){
+                        if(!users.getId().equals(firebaseUser.getUid())){
+                            usersList.add(users);
+                        }
 
-                    if(!users.getId().equals(firebaseUser.getUid())){
-                        usersList.add(users);
+                        mAdapter = new UserAdapter(getContext(), usersList, false, true);
+                        recyclerView.setAdapter(mAdapter);
                     }
-
-                    mAdapter = new UserAdapter(getContext(), usersList, false, true);
-                    recyclerView.setAdapter(mAdapter);
                 }
             }
 

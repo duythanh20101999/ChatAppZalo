@@ -1,5 +1,6 @@
 package hcmute.spkt.chatappzalo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     //hàm này dùng để lấy thanh menu có nút đăng xuất
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,10 +158,10 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.logout){
             mAuth.signOut();
             //sau khi đăng xuất sẽ trở về lại màn hình start
+            startActivity(new Intent(MainActivity.this, StartActivity.class));
             finish();
-            return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     //khi đăng nhập thành công, nếu ấn nút back trên điện thoại thì hàm này sẽ giúp thoát ứng dụng
@@ -192,4 +194,5 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Status("offline");
     }
+
 }
