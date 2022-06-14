@@ -156,6 +156,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
                         if(chat.getSender().equals(friendid) && chat.getReceiver().equals(firebaseUser.getUid()) ||
                                 chat.getSender().equals(firebaseUser.getUid()) && chat.getReceiver().equals(friendid)){
                             thelastmessage = chat.getMessage();
+
+                        }
+                        if(chat.getSender().equals(friendid) && chat.getReceiver().equals(firebaseUser.getUid())){
                             if(chat.isIsseen()){
                                 las_msg.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
                             } else {
